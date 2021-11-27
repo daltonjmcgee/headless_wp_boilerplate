@@ -1,5 +1,12 @@
 {
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
     "require": {
-        "stoutlogic/acf-builder": "^1.12"
+        "wpackagist-plugin/wp-graphql":"1.6.7",
+        "wpackagist-plugin/advanced-custom-fields": "^5.11"
     }
 }
