@@ -1,12 +1,2 @@
 {
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://wpackagist.org"
-        }
-    ],
-    "require": {
-        "wpackagist-plugin/wp-graphql":"1.6.7",
-        "wpackagist-plugin/advanced-custom-fields": "^5.11"
-    }
 }
