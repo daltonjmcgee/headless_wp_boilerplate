@@ -18,8 +18,4 @@ class ExempliBlock extends AbstractBlock {
       'icon' => 'editor-justify',
     ];
   }
-
-  function renderBlock($block) {
-    echo "<h1>EXEMPLI!</h1>";
-  }
 }
