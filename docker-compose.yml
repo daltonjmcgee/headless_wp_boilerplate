@@ -29,5 +29,18 @@ services:
     volumes:
       - ./wp-content:/var/www/html/wp-content
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+  nextjs-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    container_name: nextjs-ui
+    stdin_open: true
+    volumes:
+       - ./frontend:/app
+       - /app/node_modules
+
 volumes:
   db_data:
