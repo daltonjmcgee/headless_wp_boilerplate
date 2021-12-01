@@ -1,4 +1,4 @@
-import { getPaths } from "../helpers"
+import { getPageBlocks, getPaths } from "../helpers"
 
 export async function getStaticPaths() {
   const paths = await getPaths(process.env.WORDPRESS_API_URL);
@@ -8,11 +8,12 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({params}) {
-  console.log(params);
-  return {props: {data: params.slug}};
+export async function getStaticProps({ params }) {
+  const data = await getPageBlocks(process.env.WORDPRESS_API_URL, params.slug);
+  // TODO: Destructure Blocks and pass them into the props;
+  return { props: { data } };
 }
 
-export default function Page({data}) {
-  return <div><h1>{data}</h1></div>
+export default function Page({ data }) {
+  return <div><h1>hello</h1></div>
 }

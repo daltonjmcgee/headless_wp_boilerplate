@@ -14,7 +14,6 @@ export async function getPaths(url) {
           pages {
             edges {
               node {
-                title
                 slug
               }
             }
@@ -28,7 +27,7 @@ export async function getPaths(url) {
   for (let path of paths.data.pages.edges) {
     ret.push({
       params: {
-        slug: path.node.slug
+        slug: path.node.slug,
       }
     });
   }
@@ -37,8 +36,9 @@ export async function getPaths(url) {
   return ret;
 };
 
-export async function getPageBlocks(url) {
-  return await fetch(url, {
+export async function getPageBlocks(url, pageUri) {
+  // Get block data from given page based on URI.
+  const blocks = await fetch(url, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -46,16 +46,18 @@ export async function getPageBlocks(url) {
     body: JSON.stringify({
       query: `
         query {
-          pages {
-            edges {
-              node {
-                title
-                slug
-              }
+          page ( idType: URI, id: "${pageUri}" ) {
+            title
+            blocks {
+              attributesJSON
             }
           }
         }
-    `
+      `
     }),
-  })
+  }).then(res => res.json());
+
+  const ret = blocks.data.page;
+
+  return ret;
 };
