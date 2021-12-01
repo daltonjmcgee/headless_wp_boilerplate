@@ -6,7 +6,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY ./frontend/* /app
+COPY ./frontend/* .
 
 RUN yarn install
 

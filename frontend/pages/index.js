@@ -1,31 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getPageBlocks } from '../helpers';
 
 export async function getServerSideProps(ctx) {
+  const blocks = await getPageBlocks(process.env.WORDPRESS_API_URL).then(res=>res.json());
+  console.log(blocks);
   return {
     props: {
-      apiUrl: process.env.WORDPRESS_API_URL,
+      blocks:blocks.data,
     }
   }
 }
 
-export default function Home({ apiUrl }) {
+export default function Home({ blocks }) {
   const [state, setState] = useState([]);
-  const query =
-    useEffect(() => {
-      getPageBlocks(apiUrl)
-        .then((res) => res.json())
-        .then((data) => {
-          const newState = [];
-          for (let item of data.data.pages.edges) {
-            // const tempData = JSON.parse(item.attributesJSON.replace('\\', ''));
-              newState.push(item);
-          }
-          setState(newState);
-        });
-    }, [])
-
-  console.log(state);
+  useEffect(()=>setState(blocks),[]);
+  console.log(blocks);
   return (
     <h1>Hello Multiverse...</h1>
   )
